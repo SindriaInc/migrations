@@ -1,10 +1,10 @@
-# Directus Press - Migrations
+# Migrations
 
 A micro-service for data migration.
 
 ## Configuration for development
 
-N.B. Make sure you are setting correcly your docker environment, see [directus-press](https://git.sindria.org/directus-press-team/directus-press/blob/master/readme.md)
+N.B. Make sure you are setting correcly your docker environment.
 
 - Run composer install: `docker exec -t directus-press.sindria.org-migrations su sindria -c "composer install -d /var/www/app/"`
 
