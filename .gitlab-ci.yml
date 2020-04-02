@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
   - push
 
 .set_colors: &set_colors
@@ -35,6 +36,24 @@ build:composer:
       - .env
       - storage/
     expire_in: 7 days
+
+test:php73:
+  image: mattiabasone/php:7.3-cli
+  stage: test
+  services:
+    - name: mariadb:10.2
+      alias: database
+  variables:
+    MYSQL_DATABASE: "app"
+    MYSQL_ROOT_PASSWORD: "sindriadb"
+  only:
+    - tags
+    - branches
+  before_script:
+    - *set_colors
+    - cp .env.local .env
+  script: 
+    - vendor/bin/phpunit --configuration phpunit-ci.xml
 
 build:docker:
   image: registry.sindria.org/docker-images/image-builder:latest
